@@ -1,0 +1,23 @@
+{
+  "name": "dnd-helpers",
+  "version": "0.0.1",
+  "description": "Helper functions for D&D 5e",
+  "author": "Paul Lessing",
+  "license": "MIT",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.12.18",
+    "copy-webpack-plugin": "^5.0.2",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0"
+  }
+}

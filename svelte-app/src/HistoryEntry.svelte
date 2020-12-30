@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Operation, Record } from './models/history';
+  import { Operation, HistoryRecord } from './models/history';
   import { Currencies, Exchange } from './models/finance';
 
-  export let record: Record;
+  export let record: HistoryRecord;
 </script>
 
 { record.operation === Operation.ADD ? 'Add' : 'Subtract' }: {

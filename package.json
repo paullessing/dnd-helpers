@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "handler.js",
   "scripts": {
-    "deploy:html": "(cd svelte-app && yarn build) && sls deploy -f staticHtml"
+    "deploy:html": "(cd svelte-app && yarn build) && sls deploy -f staticHtml",
+    "dev": "(cd svelte-app && yarn dev)"
   },
   "devDependencies": {
     "@serverless/typescript": "^2.12.0",

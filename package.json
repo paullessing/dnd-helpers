@@ -9,6 +9,10 @@
     "deploy:html": "(cd svelte-app && yarn build) && sls deploy -f staticHtml",
     "dev": "(cd svelte-app && yarn dev)"
   },
+  "dependencies": {
+    "serverless-aws-static-file-handler": "^2.0.7",
+    "source-map-support": "^0.5.19"
+  },
   "devDependencies": {
     "@serverless/typescript": "^2.12.0",
     "@types/aws-lambda": "^8.10.64",
@@ -16,8 +20,6 @@
     "copy-webpack-plugin": "^7.0.0",
     "fork-ts-checker-webpack-plugin": "^6.0.0",
     "serverless-webpack": "^5.2.0",
-    "serverless-aws-static-file-handler": "^2.0.7",
-    "source-map-support": "^0.5.19",
     "ts-loader": "^8.0.10",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5",

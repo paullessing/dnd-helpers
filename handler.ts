@@ -1,14 +1,14 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
-import fs from 'fs';
+import path from 'path';
+import StaticFileHandler from 'serverless-aws-static-file-handler';
 
-export const html: APIGatewayProxyHandler = async (event, _context) => {
-  console.log(event, _context);
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'text/html',
-    },
-    body: fs.readFileSync('./static/index.html').toString(),
-  };
-};
+const clientFilesPath = path.join(__dirname, "./static/")
+const fileHandler = new StaticFileHandler(clientFilesPath)
+
+export const html: APIGatewayProxyHandler = async (event, context) => {
+  if (!event.path.startsWith('assets/') && !event.path.startsWith('build/')) {
+    event.path = 'index.html';
+  }
+  return fileHandler.get(event, context);
+}

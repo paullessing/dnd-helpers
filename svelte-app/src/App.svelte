@@ -1,37 +1,57 @@
 <script lang="ts">
+  import HistoryEntry from './HistoryEntry.svelte';
   import { Amount } from './models/finance';
+  import { Operation, History } from './models/history';
+
   type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
-  let wallet: Writeable<Amount> = { ...Amount.ZERO };
+  let operation: Operation = Operation.ADD;
+  let value: Writeable<Amount> = { ...Amount.ZERO };
 
-  let modifiedAmount: Writeable<Amount> = { ...Amount.ZERO };
+  let history = History.create(Amount.ZERO);
 
-  let resultWallet: Writeable<Amount> = { ...Amount.ZERO };
+  function addEntry(): void {
+    history = history.addEntry(operation, value);
+    value = { ...Amount.ZERO };
+    console.log(history);
+  }
+
+  $: wallet = history.getTotal();
+
 </script>
 
 <main>
   <h1>Currency Calculator</h1>
 
-  <div on:change={ () => resultWallet = Amount.subtract(wallet, modifiedAmount) }>
-    CP <input bind:value={wallet.copper} type="number" min="0" step="1" />
-    SP <input bind:value={wallet.silver} type="number" min="0" step="1" />
-<!--    EP <input bind:value={wallet.electrum} type="number" min="0" step="1" />-->
-    GP <input bind:value={wallet.gold} type="number" min="0" step="1" />
-    PP <input bind:value={wallet.platinum} type="number" min="0" step="1" />
-  </div>
-  <div on:change={ () => resultWallet = Amount.subtract(wallet, modifiedAmount) }>
-    CP <input bind:value={modifiedAmount.copper} type="number" min="0" step="1" />
-    SP <input bind:value={modifiedAmount.silver} type="number" min="0" step="1" />
-<!--    EP <input bind:value={modifiedAmount.electrum} type="number" step="1" />-->
-    GP <input bind:value={modifiedAmount.gold} type="number" min="0" step="1" />
-    PP <input bind:value={modifiedAmount.platinum} type="number" min="0" step="1" />
-  </div>
+  <label>
+    <input type=radio bind:group={operation} value={Operation.ADD}>
+    Add
+  </label>
+
+  <label>
+    <input type=radio bind:group={operation} value={Operation.SUBTRACT}>
+    Subtract
+  </label>
+
   <div>
-    CP <input bind:value={resultWallet.copper} type="number" disabled />
-    SP <input bind:value={resultWallet.silver} type="number" disabled />
-<!--    EP <input bind:value={resultWallet.electrum} type="number" disabled />-->
-    GP <input bind:value={resultWallet.gold} type="number" disabled />
-    PP <input bind:value={resultWallet.platinum} type="number" disabled />
+    CP <input bind:value={value.copper} type="number" min="0" step="1" />
+    SP <input bind:value={value.silver} type="number" min="0" step="1" />
+    GP <input bind:value={value.gold} type="number" min="0" step="1" />
+    PP <input bind:value={value.platinum} type="number" min="0" step="1" />
+  </div>
+  <button on:click={() => addEntry() }>{ operation }</button>
+  <ul>
+    {#each history.records as record}
+    <li>
+      <HistoryEntry record="{record}" />
+    </li>
+    {/each}
+  </ul>
+  <div>
+    CP <input bind:value={wallet.copper} type="number" disabled />
+    SP <input bind:value={wallet.silver} type="number" disabled />
+    GP <input bind:value={wallet.gold} type="number" disabled />
+    PP <input bind:value={wallet.platinum} type="number" disabled />
   </div>
 </main>
 

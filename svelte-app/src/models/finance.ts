@@ -9,11 +9,11 @@ export const Currencies = [
 
 export const Exchange: { [key in Currency]: { name: string, shortName: string, multiplier: number } } = {
   // Must be ascending
-  copper:   { name: 'Copper',   shortName: 'cp', multiplier: 1 },
-  silver:   { name: 'Silver',   shortName: 'sp', multiplier: 10 },
-  // electrum: { name: 'Electrum', shortName: 'ep', multiplier: 50 },
-  gold:     { name: 'Gold',     shortName: 'gp', multiplier: 100 },
-  platinum: { name: 'Platinum', shortName: 'pp', multiplier: 1000 },
+  copper:   { name: 'Copper',   shortName: 'CP', multiplier: 1 },
+  silver:   { name: 'Silver',   shortName: 'SP', multiplier: 10 },
+  // electrum: { name: 'Electrum', shortName: 'EP', multiplier: 50 },
+  gold:     { name: 'Gold',     shortName: 'GP', multiplier: 100 },
+  platinum: { name: 'Platinum', shortName: 'PP', multiplier: 1000 },
 }
 
 export type Amount = {

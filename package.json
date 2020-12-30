@@ -10,6 +10,7 @@
     "dev": "(cd svelte-app && yarn dev)"
   },
   "dependencies": {
+    "file-loader": "^6.2.0",
     "serverless-aws-static-file-handler": "^2.0.7",
     "source-map-support": "^0.5.19"
   },
